@@ -69,9 +69,9 @@ void pump_on() {
 void Temperature_Control() 
 {
   A0_Vout = analogRead(A0);                                   //read the analog sensor and store it
-  Temperature_Value = A0_Vout / 1024;                         //input gives us a value between 0 and 1023 so find voltage per single unit
-  Temperature_Value = Temperature_Value * 5;                  //multiply by 5V to get voltage (finding the percentage of 5V)
-  Temperature_Value = Temperature_Value - 0.5;                //subtract the offset as we want  0° – 175° range not standard setting -50° to 125°
+  Voltage_Per_UnitLevel = (A0_Vout  * 5) / 1024;              //input gives us a value between 0 and 1023 so find voltage per single unit
+                                                              //multiply by 5V to get voltage (finding the percentage of 5V)
+  Temperature_Value = Voltage_Per_UnitLevel - 0.5;                //subtract the offset as we want  0° – 175° range not standard setting -50° to 125°
   Temperature_Value = Temperature_Value * 100;                //multiply by 100 to convert to degrees
   Serial.print(A0_Vout);
   Serial.print("Current Temperature: ");
